@@ -1,0 +1,67 @@
+{
+  "name": "vm_env",
+  "description": "running chef env in a vm",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "ceilometer": {
+      "repo": "https://github.com/att-cloud/ceilometer.git",
+      "branch": "stable/folsom-att",
+      "periodic_interval": 20
+    },
+    "developer_mode": true,
+    "enable_collectd": false,
+    "enable_monit": false,
+    "glance": {
+      "image_upload": true,
+      "images": ["cirros"]
+    },
+    "nova": {
+      "ratelimit" : {
+        "api" : { "enabled" : true },
+        "volume" : { "enabled" : true }
+      },
+      "libvirt": { "virt_type": "kvm" },
+      "networks": [
+        {
+            "label": "public",
+            "ipv4_cidr": "10.10.100.0/24",
+            "num_networks": "1",
+            "network_size": "255",
+            "bridge": "br100",
+            "bridge_dev": "eth0",
+            "dns1": "8.8.8.8",
+            "dns2": "8.8.4.4"
+        },
+        {
+            "label": "private",
+            "ipv4_cidr": "172.16.101.0/24",
+            "num_networks": "1",
+            "network_size": "255",
+            "bridge": "br101",
+            "bridge_dev": "eth0",
+            "dns1": "8.8.8.8",
+            "dns2": "8.8.4.4"
+        }
+      ]
+    },
+    "mysql": {
+      "allow_remote_root": true,
+      "root_network_acl": "%"
+    },
+    "osops_networks": {
+      "swift": "10.1.0.0/24",
+      "nova": "10.1.0.0/24",
+      "public": "10.1.0.0/24",
+      "management": "10.1.0.0/24"
+    },
+    "swift": {
+      "authmode": "keystone"
+    },
+    "package_component": "folsom"
+  }
+}
