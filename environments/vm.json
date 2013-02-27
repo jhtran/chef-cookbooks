@@ -25,7 +25,7 @@
         "api" : { "enabled" : true },
         "volume" : { "enabled" : true }
       },
-      "libvirt": { "virt_type": "kvm" },
+      "libvirt": { "virt_type": "qemu" },
       "networks": [
         {
             "label": "public",
@@ -60,6 +60,7 @@
       "management": "10.1.0.0/24"
     },
     "swift": {
+      "swift_hash": "66a3d6b56c1f479c8b4e70ab5c2000f5",
       "authmode": "keystone"
     },
     "package_component": "folsom"
